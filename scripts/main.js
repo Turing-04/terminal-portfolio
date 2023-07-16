@@ -4,11 +4,11 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
     
 app.addEventListener("keypress", async function(event){
   if(event.key === "Enter"){
-    await delay(180);
+    await delay(120);
     getInputValue();
    
     removeInput();
-    await delay(180);
+    await delay(120);
     new_line();
   }
 });
@@ -21,7 +21,7 @@ app.addEventListener("click", function(event){
 
 async function open_terminal(){
   createText("Welcome to my Terminal portfolio");
-  await delay(500);
+  //await delay(500);
   createText(`<pre> 
    ___ _ __ (_) __ _ _ __ ___   __ _| |_(_)_  __
   / _ \\ '_ \\| |/ _\` | '_ \` _ \\ / _\` | __| \\ \\/ /
@@ -31,16 +31,16 @@ async function open_terminal(){
   </pre>`)
             
 
-  await delay(200);
+ //await delay(200);
 
   createText("Initializing the server...");
-  await delay(1200); 
+  //await delay(1200); 
 
   const p = document.createElement("p");
   p.innerHTML = `Type '<span style="color:#66C2CD">help</span>' to find out about basic available commands.`;
   app.appendChild(p);
 
-  await delay(350);
+  //await delay(350);
   new_line();
 }
 
@@ -71,17 +71,17 @@ async function getInputValue(){
     trueValue(value);
     
     createCode("all", "To list all available commands.");
-    createCode("about me", "Who am i and what do i do.");
-    createCode("all", "To list all available commands.");
-    createCode("socials", "All my social networks.");
-    // createCode("clear", "Clean the terminal.");
+    createCode("whoami", "A quick introduction to myself.");
+    //createCode("help", "To discover some basic commands ");
+    createCode("contact", "A few ways to contact me.");
+    createCode("prog", "To see the programming languages I work with (in order of preference / proficiency).");
     // createCode("exit", "Exit the terminal.");
     createCode("sudo rm -rf /*", "Don't do this !!");
   } 
   else if(value==="all") {
     trueValue(value);
     // rajouter toutes les commandes dispos
-    createText("all, help, whoami, ctf, github, sudo rm -rf /*, clear, exit, pgp");
+    createText("all, help, whoami, ctf, github, sudo rm -rf /*, clear, pgp, prog, exit");
 
     createText("use '<span style='color:#66C2CD'>all -d</span>' to see a description of all commands");
   } 
@@ -89,13 +89,15 @@ async function getInputValue(){
     trueValue(value);
     // rajouter toutes les commandes dispos
     createHelp("all","To list all available commands.");
-    createHelp("help","For basic commands.");
+    createHelp("help","To discover a few basic commands.");
     createHelp("whoami","A (very) short bio.");
     createHelp("github","My github profile.");
     createHelp("ctf","My CTF info and accounts.");
-    //createHelp("social", "All my social networks."); -> leetcode, codeChef, GH, linkedin ?
-    // skills ou prog languages
-    createHelp("sudo rm -rf /*","Don't do this !!");
+    createHelp("contact", "A few ways to contact me.");
+    createHelp("prog", "To see the programming languages I work with (in order of preference / proficiency).");
+    // skills ou prog languages - serait mieux de peaufiner leetcode/codechef/rootme en plus des profils dans ctf
+    // some of the tools i use for doing CTFs -> cf tools.md de GoogleCTF
+    createHelp("sudo rm -rf /*","Usually a bad idea to use this ... ");
     createHelp("clear", "To clear the terminal.");
     createHelp("exit", "To close the terminal.");
     createHelp("pgp", "My PGP key to contact me securely.");
@@ -108,25 +110,30 @@ async function getInputValue(){
   else if(value === "whoami"){
     trueValue(value);
     createText("Hey,")
-    createText("I'm a cybersecurity master student at ETHZ and EPFL. ")
-    createText("I like doing CTFs (Capture The Flag), I've played on my own as \"Turing-04\" and now \"Enigmatix\" but also with \
-    swiss teams <a href='https://polygl0ts.ch/' target='_blank'>Polygl0ts</a>  \
-     and <a href='https://ctftime.org/team/42934' target='_blank'>Organizers</a>.")
+    createText("I'm a cybersecurity master student at <a href='https://ethz.ch/en.html' target='_blank'>ETHZ</a> and <a href='https://www.epfl.ch/en/ 'target='_blank'>EPFL</a>. ")
 
+    createText("I like playing around with stuff, learning new stuff but what I enjoy the most is breaking stuff.")
+    createText("I easily get inspired by things. Sometimes I waste a lot of time but often I make some fun discoveries.")
+    createText("I am particularly interested in networking, reverse engineering, web exploitation and forensics. I also have some experience with RF and hardware security (NFC, WIFI, GPS, etc. using the HackRF One, Flipper Zero, Arduinos, Raspberry PIs, ESP32 and more).")
+
+
+    createText("I also enjoy playing CTFs (Capture The Flag), I've competed on my own as \"Turing-04\" and now \"Enigmatix\" but also with \
+    swiss teams <a href='https://polygl0ts.ch/' target='_blank'>Polygl0ts</a>  \
+     and <a href='https://ctftime.org/team/42934' target='_blank'>Organizers</a>. I still have a lot to learn however and it's always fun to take part in new competitions to learn new things.")
+  } else if(value==="prog") {
+    trueValue(value);
+    createText("Ordered by skill level / preference:")
+    createText("Python <span style='color:grey'> (pwntools, scapy, Flask, numpy, pytorch, etc.) </span>, C, Java, bash/zsh scripting, Scala, C++, SQL, VHDL, Assembly, JavaScript <span style='color:grey'>(React)</span>, HTML, CSS");
   }
-  else if(value === "social"){ // to delete ?
+  else if(value === "contact" || value==="social"){ 
     trueValue(value); 
-    createText("<a href='https://github.com/heberleonard2' target='_blank'><i class='fab fa-github white'></i> github.com/heberleonard2</a>")
-    // Discord
-    //createText("<a href='https://www.linkedin.com/in/heber-leonard/' target='_blank'><i class='fab fa-linkedin-in white'></i> linkedin.com/in/heber-leonard</a>")
-    // rootme
-    //createText("<a href='https://www.instagram.com/heber_leonard/' target='_blank'><i class='fab fa-instagram white'></i> instagram.com/heber_leonard</a>")
-    // Tryhackme
-    // picoCTF
+    createText("<a href='https://github.com/turing-04' target='_blank'><i class='fab fa-github white'></i> github.com/turing-04</a>")
+    dom = "enigmatix.xyz"
+    createText("<a href='mailto:contact" + "@" + dom+ "' target='_blank'><i class='fa fa-envelope white'></i> contact<i class='fa fa-at'></i>enigmatix.xyz</a>")        
+    //createText("<a href='https://www.linkedin.com/in/XXXXX/' target='_blank'><i class='fab fa-linkedin-in white'></i> linkedin.com/in/XXXX</a>")
   }
   else if(value === "sudo rm -rf /*" || value === "sudo rm -rf /" || value === "sudo rm -rf / --no-preserve-root" || value === "sudo rm -fr /*"){
     trueValue(value);
-    // create text bonjour with line-height 0.3 using createText()
     
     createText(`<pre style='line-height:0.7'>    ________________<br>
     < how dare you ? ><br>
@@ -146,8 +153,11 @@ async function getInputValue(){
   (( / ))     .----~-.\        \\-'                 .~         \\  \`. \^-.<br>
              ///.----..>        \\             _ -~             \`.  ^-\`  ^-_<br>
                ///-._ _ _ _ _ _ _}^ - - - - ~                     ~-- ,.-~<br>
-                                                                  /.-~<br>
-                                                                  </span></pre>`)
+                                                                  /.-~<br></pre>`);
+    await delay(100);
+    createText("You've been warned, you should not have done that !!");
+    createText("Hopefully, you have no rights on my territory so nothing will happen. ")
+
   }
   else if(value === "clear"){
     document.querySelectorAll("p").forEach(e => e.parentNode.removeChild(e));
@@ -177,7 +187,7 @@ async function getInputValue(){
     createText("<a href='https://www.root-me.org/Turing-04?lang=en' target='_blank'><i class='fas fa-user white'></i> RootMe</a>");
   } else if(value==="github") {
     trueValue(value);
-    createText("<a href='https://github.com/heberleonard2' target='_blank'><i class='fab fa-github white'></i> github.com/heberleonard2</a>")
+    createText("<a href='https://github.com/turing-04' target='_blank'><i class='fab fa-github white'></i> github.com/turing-04</a>")
   } else if(value==="pgp" || value==="gpg") {
     trueValue(value);
     createText(`<pre>-----BEGIN PGP PUBLIC KEY BLOCK----- 
@@ -299,5 +309,25 @@ function createCode(code, text){
   p.innerHTML = `${code} <br/><span class='text'> ${text} </span>`;
   app.appendChild(p);
 }
+
+
+//handle menu buttons
+var red_button = document.getElementsByClassName('red button')[0];
+var orange_button = document.getElementsByClassName('orange button')[0];
+var green_button = document.getElementsByClassName('green button')[0];
+
+
+red_button.addEventListener('click', function (event) {
+    alert('Bye!');
+    window.close();
+});
+
+orange_button.addEventListener('click', function (event) {
+ //TODO: minimize window
+});
+
+green_button.addEventListener('click', function (event) {
+  //TODO: maximize window
+});
 
 open_terminal()

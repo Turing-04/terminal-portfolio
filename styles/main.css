@@ -45,6 +45,7 @@ body{
 }
 .container{
   display:flex;
+  box-shadow: 0 0 10px rgb(128, 128, 128);
   flex-direction: column;
   width:90%;
   height:85%;
@@ -74,7 +75,7 @@ body{
   cursor:pointer;
 }
 .red{background-color:#F5544D;}
-.yellow{background-color:#FABD2F;}
+.orange{background-color:#FABD2F;}
 .green{background-color:#47D043;}
 div.title{
   flex:1;
